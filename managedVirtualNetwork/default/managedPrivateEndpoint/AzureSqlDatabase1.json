@@ -1,0 +1,10 @@
+{
+	"name": "AzureSqlDatabase1",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/d1e34e00-3965-4018-96a9-169755063128/resourceGroups/SQL/providers/Microsoft.Sql/servers/jksql",
+		"groupId": "sqlServer",
+		"fqdns": [
+			"jksql.database.windows.net"
+		]
+	}
+}
