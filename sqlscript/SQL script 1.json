@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "SELECT *\nFROM OPENROWSET(BULK 'https://jkadls2.dfs.core.windows.net/adbmount/0Sampledata/PARQUET/SalesLT.SalesOrderDetaildatetime2.parquet',\n                FORMAT = 'PARQUET') as [r]\n\nCREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Password01!'\nGO\n-- Optional: Create MASTER KEY if not exists in database:\n-- CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Very Strong Password>\nCREATE DATABASE SCOPED CREDENTIAL SynapseIdentity\nWITH IDENTITY = 'Managed Identity';\nGO\nCREATE EXTERNAL DATA SOURCE mysample\nWITH (    LOCATION   = 'https://jkadls2.dfs.core.windows.net/adbmount/0Sampledata',\n          CREDENTIAL = SynapseIdentity\n)\n\nSELECT TOP 10 * FROM OPENROWSET(BULK 'PARQUET/SalesLT.SalesOrderDetaildatetime2.parquet', DATA_SOURCE = 'mysample', FORMAT='PARQUET') as rows;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "jkserverless",
+				"poolName": "Built-in"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}
